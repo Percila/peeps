@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Search People</title>
+	<style type="text/css">
+		#container{
+			width: 100%;
+			height: 100%;
+			position: relative;
+		}
+		#login{
+			width: 30%;
+			height: 30%;
+			margin: auto;
+			position: absolute;
+			left:0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		{% if messages %}
+  			{% for message in messages %}
+  			<p>{{ message }}</p>
+   			{% endfor %}
+		{% endif %}
+		<div id="login">
+			<h3>Who are you</h3>
+			<form action="profile" method="GET">
+				FirstName:
+				<input type="text" name="firstname">
+				<br>
+				LastName:
+				<input type="text" name="lastname">
+				<br><br>
+				<input type="submit" value="Go">
+			</form>
+		</div>	
+	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+	</script>
+	<script type="text/javascript">
+		$('form').submit(function(event){
+			if (($('input:first').val() != "") && ($('input[name="lastname"]').val() != ""))
+				this.submit();
+			else
+				alert("You must enter both first and last names");
+				event.preventDefault();
+			});
+	</script>
+</body>
+</html>

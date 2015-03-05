@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Search People</title>
+	<style type="text/css">
+		#container{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+		}
+		#friends{
+			width: 30%;
+			height: 100%;
+			float: left;
+		}
+		#search{
+			width: 30%;
+			height: 100%;
+			float: left;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div id="friends">
+			<h2> {{ person.name }} </h2>
+			<h3>Your Friends</h3>
+			<ul>
+			{% for i in person.friends %}
+				<li> {{ i.name }} </li>
+			{% endfor %}
+			</ul>
+			<br><br><br>
+			<h3>People you may know</h3>
+			<div>
+				{% for may_know in may_know_list %}
+					{% for each_may_know in may_know %}
+						<p><b>{{ each_may_know.name }} : </b>{{ each_may_know.reason }}</p>
+					{% endfor %}
+				{% endfor %}
+			</div>
+		</div>
+		<div id="search">
+		<h4>Search for others</h4>
+			<form action="search" method="GET">
+				<input type="text" name="search">
+				<input type="submit" value="Go">
+			</form>
+
+			<div id="search_results">
+				
+			</div>
+		</div>
+	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+	</script>
+	<script type="text/javascript">
+	var form = $('form');
+	form.submit(function() {
+		$.ajax({
+			type: form.attr('method'),
+			url: form.attr('action'),
+			data: form.serialize(),
+			success: function(data) {
+				$('#search_results').html(data);
+			},
+			error: function(data) {
+				$('#search_results').html(data);
+			}
+		});
+	});
+	</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+*.py[cod]
+main_index
+may_know_index
+dont_have_index
+people/static
+templates/search
+db.sqlite3
